@@ -15,7 +15,7 @@ export default function RenderHeader(pageName)
                 <nav class="hidden md:flex items-center gap-8 header-nav" id="desktop-nav">
                     <a href="/index.html"  class="desktop-nav-element">Home</a>
                     <a href="/about-page/about.html"  class="desktop-nav-element">About</a>
-                    <a href="/department-page/department.html"  class="desktop-nav-element">Our Department</a>
+                    <a href="https://samson27-nam.github.io/ices-civil-dept/"  class="desktop-nav-element">Our Department</a>
                     <a href="/executives-page/executives.html" class="desktop-nav-element">Executives</a>
                     <a href="/innovations-page/innovations.html"  class="desktop-nav-element">Innovations</a>
                     <a href="/register-page/register"  class="desktop-nav-element">Register</a>
@@ -34,7 +34,7 @@ export default function RenderHeader(pageName)
             <nav id="mobileMenu" class="mobile-menu md:hidden" id="mobile-menu">
                 <a href="/index.html" class="mobile-nav-element">Home</a>
                 <a href="#" class="mobile-nav-element">About</a>
-                <a href="/department.html" class="mobile-nav-element">Our Department</a>
+                <a href="https://samson27-nam.github.io/ices-civil-dept/" class="mobile-nav-element">Our Department</a>
                 <a href="/executives.html" class="mobile-nav-element">Executives</a>
                 <a href="#" class="mobile-nav-element">Innovations</a>
                 <a href="#" class="mobile-nav-element">Register</a>
@@ -71,5 +71,6 @@ export default function RenderHeader(pageName)
     // }
 
     // console.log(mobileNavElem);
+
 
 }
