@@ -1,5 +1,5 @@
-import RenderFooter from "../common/Footer.js";
-import RenderHeader from "../common/Header.js";
+import RenderFooter from "./common/Footer.js";
+import RenderHeader from "./common/Header.js";
 
 // ===========Global Variable ====================
 // const footer = document.getElementById("footerID");
@@ -423,4 +423,5 @@ function RenderExecutivePage()
 //     timeout = setTimeout(() => {
 //         RenderExecutivePage();
 //     }, 200);
+
 // });
