@@ -1,5 +1,5 @@
-import RenderFooter from "./common/Footer.js";
-import RenderHeader from "./common/Header.js";
+import RenderFooter from "../common/Footer.js";
+import RenderHeader from "../common/Header.js";
 
 // ===========Global Variable ====================
 // const footer = document.getElementById("footerID");
@@ -69,20 +69,20 @@ const sessionData = [
                 position: 'Treasurer',
                 yearOfStudy: '3rd Year',
                 major: "Transportation Engineering",
-                bio: "Short bio for Memory",
-                image: "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                email: "bcet22-snamanya@mubas.ac.mw",
-                linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
+                bio: "A dedicated civil engineering student and developing leader known for guiding teams, supporting peers, and contributing to impactful, sustainable projects. Passionate about turning technical knowledge into real-world results.",
+                image: "memorychikwawa.jpg",
+                email: "memorychikwa32@gmail.com",
+                linkedIn: "https://www.linkedin.com/in/memory-chikwawa-9b98ab32a/"
             },
             {
                 name: 'Edith Kabito',
                 position: 'Social Media Director',
                 yearOfStudy: '4th Year',
                 major: "Structural Engineering",
-                bio: "Short bio for Edith",
-                image: "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                email: "bcet22-snamanya@mubas.ac.mw",
-                linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
+                bio: "A motivated civil engineering student with a deep interest in forward-thinking design and practical innovation. I enjoy exploring new concepts and turning them into solutions that truly improve how communities live, move, and grow.",
+                image: "edithkabito.jpg",
+                email: "bces22-echiumia@mubas.ac.mw",
+                linkedIn: "https://www.linkedin.com/in/edith-kabito-12712435b/"
             },
             {
                 name: 'Apatsa Kambale',
@@ -196,10 +196,10 @@ const sessionData = [
             position: 'Social Media Director',
             yearOfStudy: '4th Year',
             major: "Structural Engineering",
-            bio: "Short bio for tuli",
+            bio: "Creative and entrepreneurial Pan-African student engineer with a passion for positive Climate Action and Sustainable development in the global south.",
             image: "tulibakemsiska.jpg",
-            email: "bcet22-snamanya@mubas.ac.mw",
-            linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
+            email: "bces22-tmsiska@mubas.ac.mw",
+            linkedIn: "https://www.linkedin.com/in/tulibake-msiska-747a7429a/"
         },
         {
             name: 'Melissa Gondwe',
@@ -220,6 +220,7 @@ let session = currentYear;
 
 // ========to be done on load ===============
 RenderSessionDropdown();
+RenderHeader(pageName);
 RenderExecutivePage();
 
 //===========================================
@@ -273,7 +274,7 @@ dropdownItems.forEach(item => {
         sessionButton.classList.remove('active');
         sessionDropdown.classList.remove('active');
 
-        RenderExecutivePage();
+        RenderWholeExecutive();
     });
 });
 
@@ -390,13 +391,7 @@ function RenderExecutiveMembers(eMembers){
     RenderFooter();
 }
 
-// ==========RENDER THE PAGE =================
-function RenderExecutivePage()
-{
-    /**
-     * RenderSessionDropdown();
-     */
-    RenderHeader(pageName);
+function RenderWholeExecutive(){
     sessionData.forEach((sData) => {
         let leaders;
         let executiveMembers;
@@ -409,5 +404,23 @@ function RenderExecutivePage()
             // RenderSessionDropdown();
         }
     })
-
 }
+
+// ==========RENDER THE PAGE =================
+function RenderExecutivePage()
+{
+    /**
+     * RenderSessionDropdown();
+     */
+    RenderWholeExecutive();
+}
+
+
+// let timeout;
+//
+// window.addEventListener("resize", () => {
+//     clearTimeout(timeout);
+//     timeout = setTimeout(() => {
+//         RenderExecutivePage();
+//     }, 200);
+// });
