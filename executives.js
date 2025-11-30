@@ -220,7 +220,6 @@ let session = currentYear;
 
 // ========to be done on load ===============
 RenderSessionDropdown();
-RenderHeader(pageName);
 RenderExecutivePage();
 
 //===========================================
@@ -388,7 +387,7 @@ function RenderExecutiveMembers(eMembers){
                 </div>`
         executiveCore.innerHTML += executiveMemberGrid;
     })
-    RenderFooter();
+    
 }
 
 function RenderWholeExecutive(){
@@ -412,7 +411,11 @@ function RenderExecutivePage()
     /**
      * RenderSessionDropdown();
      */
-    RenderWholeExecutive();
+    document.addEventListener("DOMContentLoaded", ()=>{
+        RenderHeader(pageName);
+        RenderWholeExecutive();
+        RenderFooter();
+    }
 }
 
 
@@ -425,4 +428,5 @@ function RenderExecutivePage()
 //     }, 200);
 
 // });
+
 
