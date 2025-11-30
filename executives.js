@@ -217,7 +217,9 @@ let session = currentYear;
 //=================================================
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    
+const sessionButton = document.getElementById('sessionButton');
+const sessionDropdown = document.getElementById('sessionDropdown');
+const currentSessionSpan = document.getElementById('currentSession');
 // ========to be done on load ===============
 RenderSessionDropdown();
 RenderExecutivePage();
@@ -428,6 +430,7 @@ function RenderExecutivePage()
 //     }, 200);
 
 // });
+
 
 
 
