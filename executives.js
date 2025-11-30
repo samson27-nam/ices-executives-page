@@ -33,7 +33,7 @@ const sessionData = [
                 linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
             },
             {
-                name: "Hope Mzati Tsonga",
+                name: "Hope Tsonga",
                 position: 'Vice President',
                 yearOfStudy: '3rd Year',
                 major: "Transportation Engineering",
@@ -49,10 +49,10 @@ const sessionData = [
                 position: 'General Secretary',
                 yearOfStudy: '4th Year',
                 major: "Structural Engineering",
-                bio: "Short bio for Yamie",
-                image: "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                email: "bcet22-snamanya@mubas.ac.mw",
-                linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
+                bio: "Proactive leader keen on streamlining design and building with integrity. Pioneering efforts to turn classroom ideas into practical, high-quality civil engineering work.",
+                image: "yamikaningaiyaye.jpg",
+                email: "bces22-yngaiyaye@mubas.ac.mw",
+                linkedIn: "https://www.linkedin.com/in/yamikani-ngaiyaye"
             },
             {
                 name: 'Glory Nyirenda',
@@ -425,3 +425,4 @@ function RenderExecutivePage()
 //     }, 200);
 
 // });
+
