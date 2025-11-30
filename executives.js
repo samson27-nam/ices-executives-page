@@ -3,9 +3,7 @@ import RenderHeader from "./common/Header.js";
 
 // ===========Global Variable ====================
 // const footer = document.getElementById("footerID");
-const sessionButton = document.getElementById('sessionButton');
-const sessionDropdown = document.getElementById('sessionDropdown');
-const currentSessionSpan = document.getElementById('currentSession');
+
 const currentYear = "2025/2026"
 const pageName = 'Executives';
 const sessions = [
@@ -218,6 +216,8 @@ let session = currentYear;
 
 //=================================================
 
+document.addEventListener("DOMContentLoaded", ()=>{
+    
 // ========to be done on load ===============
 RenderSessionDropdown();
 RenderExecutivePage();
@@ -300,7 +300,7 @@ document.querySelectorAll('.animate-slide-up').forEach(el => {
 // Set current year in footer
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-
+})
 
 //===========RENDER SESSION DROPDOWN ============
 function RenderSessionDropdown() {
@@ -428,6 +428,7 @@ function RenderExecutivePage()
 //     }, 200);
 
 // });
+
 
 
 
