@@ -215,8 +215,6 @@ const sessionData = [
 let session = currentYear;
 
 //=================================================
-
-document.addEventListener("DOMContentLoaded", ()=>{
 const sessionButton = document.getElementById('sessionButton');
 const sessionDropdown = document.getElementById('sessionDropdown');
 const currentSessionSpan = document.getElementById('currentSession');
@@ -302,7 +300,7 @@ document.querySelectorAll('.animate-slide-up').forEach(el => {
 // Set current year in footer
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-})
+
 
 //===========RENDER SESSION DROPDOWN ============
 function RenderSessionDropdown() {
@@ -430,6 +428,7 @@ function RenderExecutivePage()
 //     }, 200);
 
 // });
+
 
 
 
