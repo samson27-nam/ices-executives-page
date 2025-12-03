@@ -52,10 +52,10 @@ const sessionData = [
                 position: 'Publicity Secretary',
                 yearOfStudy: '4th Year',
                 major: "Transportation Engineering",
-                bio: "Short bio for Glory",
-                image: "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                email: "bcet22-snamanya@mubas.ac.mw",
-                linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
+                bio: "A forward-thinking leader who cares about building sustainable infrastructure for the future. Focused on turning school knowledge into real engineering solutions that solve problems and help businesses grow.",
+                image: "glorynyirenda.jpg",
+                email: "bcet22-gnyirenda@mubas.ac.mw",
+                linkedIn: "https://www.linkedin.com/in/glory-nyirenda-79a659376/"
             },
             {
                 name: 'Memory Chikwawa',
@@ -102,10 +102,10 @@ const sessionData = [
                 position: 'Executive Member',
                 yearOfStudy: '3rd Year',
                 major: "Transportation Engineering",
-                bio: "Short bio for Ellen",
-                image: "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                email: "bcet22-snamanya@mubas.ac.mw",
-                linkedIn: "https://www.linkedin.com/in/samson-namanya-3278952b3/"
+                bio: "Aspiring civil engineer, with a keen interest in transportation systems, committed to shaping the future of the built environment. Focused on integrating sustainable practices and smart technologies into infrastructure design. Driven by the goal of creating efficient, safe, and environmentally conscious systems that serve communities and endure for generations.",
+                image: "ellennothale.jpeg",
+                email: "bcet23-enothale@mubas.ac.mw",
+                linkedIn: "https://www.linkedin.com/in/ellen-nothale-741031331/"
             },
             {
                 name: 'Hafiza Matola',
@@ -392,5 +392,6 @@ function RenderWholeExecutive() {
 
 // FOOTER YEAR ========================
 document.getElementById("currentYear").textContent = new Date().getFullYear();
+
 
 
