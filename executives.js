@@ -1,21 +1,16 @@
 import RenderFooter from "./common/Footer.js";
 import RenderHeader from "./common/Header.js";
 
-// ===========Global Variable ====================
-// const footer = document.getElementById("footerID");
+// GLOBAL DATA ========================
 
-const currentYear = "2025/2026"
-const pageName = 'Executives';
+const currentYear = "2025/2026";
+const pageName = "Executives";
+
 const sessions = [
-    {
-        year: "2025/2026",
-        current: true, //is this the current year?
-    },
-    {
-        year: "2024/2025",
-        current: false,
-    }
-]
+    { year: "2025/2026", current: true },
+    { year: "2024/2025", current: false }
+];
+
 const sessionData = [
     {
         year : "2025/2026",
@@ -211,227 +206,188 @@ const sessionData = [
         }
     ]
     }
-]
+];
+
 let session = currentYear;
 
-//=================================================
-const sessionButton = document.getElementById('sessionButton');
-const sessionDropdown = document.getElementById('sessionDropdown');
-const currentSessionSpan = document.getElementById('currentSession');
-// ========to be done on load ===============
+
+// DOM ELEMENTS =======================
+const sessionButton = document.getElementById("sessionButton");
+const sessionDropdown = document.getElementById("sessionDropdown");
+const currentSessionSpan = document.getElementById("currentSession");
+
+
+// INITIALIZE PAGE ====================
 RenderSessionDropdown();
-RenderExecutivePage();
-
-//===========================================
-
-
-// Mobile menu toggle
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('active');
-});
-
-// Session dropdown functionality
+RenderHeader(pageName);
+RenderWholeExecutive();
+RenderFooter();
 
 
-sessionButton.addEventListener('click', (e) => {
+// MOBILE MENU ========================
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+    });
+}
+
+
+// DROP-DOWN FUNCTIONALITY ============
+sessionButton.addEventListener("click", (e) => {
     e.stopPropagation();
-    sessionButton.classList.toggle('active');
-    sessionDropdown.classList.toggle('active');
+    sessionButton.classList.toggle("active");
+    sessionDropdown.classList.toggle("active");
 });
 
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
+// Close dropdown on outside click
+document.addEventListener("click", (e) => {
     if (!sessionButton.contains(e.target) && !sessionDropdown.contains(e.target)) {
-        sessionButton.classList.remove('active');
-        sessionDropdown.classList.remove('active');
+        sessionButton.classList.remove("active");
+        sessionDropdown.classList.remove("active");
     }
 });
 
-// Handle session selection
 
-//let leaders = [];
-// executiveMembers = [];
-
-const dropdownItems = document.querySelectorAll('.dropdown-item');
-dropdownItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-        e.preventDefault();
-        session = item.getAttribute('data-session');
-
-        // Update current session display
-        currentSessionSpan.textContent = `ACADEMIC SESSION ${session}`;
-
-        // Update current class
-        dropdownItems.forEach(i => i.classList.remove('current'));
-        item.classList.add('current');
-
-        // Close dropdown
-        sessionButton.classList.remove('active');
-        sessionDropdown.classList.remove('active');
-
-        RenderWholeExecutive();
-    });
-});
-
-// Intersection Observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-        }
-    });
-}, observerOptions);
-
-// Observe all animated elements
-document.querySelectorAll('.animate-slide-up').forEach(el => {
-    el.style.animationPlayState = 'paused';
-    observer.observe(el);
-});
-
-// Set current year in footer
-document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-
-
-//===========RENDER SESSION DROPDOWN ============
+// RENDER SESSION DROPDOWN =============
 function RenderSessionDropdown() {
-    sessionDropdown.innerHTML = ``;
-    sessions.forEach((session) => {
-        sessionDropdown.innerHTML += `
-                    <a href="#" class="dropdown-item ${session.current? 'current' : ''}" data-session="${session.year}">
-                        <span class="dropdown-year">${session.year}</span>
-                         <span class="dropdown-label">${session.current? 'Current Session' : ''}</span> 
-                    </a>`
-    })
+    sessionDropdown.innerHTML = "";
+
+    sessions.forEach((ses) => {
+        const html = `
+            <a href="#" 
+               class="dropdown-item ${ses.current ? "current" : ""}" 
+               data-session="${ses.year}">
+                <span class="dropdown-year">${ses.year}</span>
+                <span class="dropdown-label">${ses.current ? "Current Session" : ""}</span>
+            </a>
+        `;
+        sessionDropdown.innerHTML += html;
+    });
+
+    // IMPORTANT: bind event AFTER generation
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    dropdownItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            session = item.getAttribute("data-session");
+
+            currentSessionSpan.textContent = `ACADEMIC SESSION ${session}`;
+
+            dropdownItems.forEach((i) => i.classList.remove("current"));
+            item.classList.add("current");
+
+            sessionButton.classList.remove("active");
+            sessionDropdown.classList.remove("active");
+
+            RenderWholeExecutive();
+        });
+    });
 }
-// ========= LEADERSHIP CORE =================
+
+
+// LEADERS RENDER ======================
 function RenderLeaders(Leaders) {
+    const leadershipCore = document.getElementById("leadership-core");
+    leadershipCore.innerHTML = "";
 
-    const leadershipCore = document.getElementById('leadership-core');
-    leadershipCore.innerHTML = ``;
     Leaders.forEach((leader) => {
-        const leaderGrid = `<div class="exec-card bg-white rounded-xl shadow-lg overflow-hidden animate-slide-up delay-1">
-                    <div class="photo-wrapper">
-                        <img src=${leader.image? leader.image : "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"} alt="${leader.position}" class="exec-photo">
-                        <div class="photo-overlay">
-                            <div class="flex space-x-2">
-                                <a href= ${leader.linkedIn} class="social-icon">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                    </svg>
-                                </a>
-                                <a href="mailto:${leader.email}" class="social-icon">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                    </svg>
-                                </a>
-                            </div>
+        const html = `
+            <div class="exec-card bg-white rounded-xl shadow-lg overflow-hidden animate-slide-up delay-1">
+                <div class="photo-wrapper">
+                    <img 
+                        src="${leader.image ? leader.image : "https://images.unsplash.com/photo-1740153204804-200310378f2f"}"
+                        alt="${leader.name}"
+                        class="exec-photo"
+                    >
+                    <div class="photo-overlay">
+                        <div class="flex space-x-2">
+                            <a href="${leader.linkedIn}" class="social-icon">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239..."></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:${leader.email}" class="social-icon">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8">
+                                    </path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                    <div class="exec-content p-6">
-                        <span class="position-badge leadership-badge">${leader.position}</span>
-                        <h3 class="mt-3 mb-1" style="color: var(--ices-navy);">${leader.name}</h3>
-                        <p class="text-sm mb-3" style="color: var(--ices-orange);">${leader.yearOfStudy} • ${leader.major}</p>
-                        <p class="text-gray-600" style="line-height: 1.6;">
-                          ${leader.bio}
-                        </p>
-                    </div>
-                </div>`
-        leadershipCore.innerHTML += leaderGrid;
-    })
+                </div>
+
+                <div class="exec-content p-6">
+                    <span class="position-badge leadership-badge">${leader.position}</span>
+                    <h3 class="mt-3 mb-1" style="color: var(--ices-navy);">${leader.name}</h3>
+                    <p class="text-sm mb-3" style="color: var(--ices-orange);">${leader.yearOfStudy} • ${leader.major}</p>
+                    <p class="text-gray-600" style="line-height: 1.6;">${leader.bio}</p>
+                </div>
+            </div>
+        `;
+        leadershipCore.innerHTML += html;
+    });
 }
 
-//======== EXECUTIVE CORE ====================
-function RenderExecutiveMembers(eMembers){
-    const executiveCore = document.getElementById('executive-board');
-    executiveCore.innerHTML = ``;
 
-    eMembers.forEach(member => {
-        // language=HTML
-        const executiveMemberGrid = `<div class="exec-card bg-white rounded-xl shadow-lg overflow-hidden animate-slide-up delay-3">
-                    <div class="photo-wrapper">
-                        <img src=${member.image? member.image : "https://images.unsplash.com/photo-1740153204804-200310378f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBzdHVkZW50JTIwbGVhZGVyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzY0MjU0NTY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"}
-                             alt=${member.position} class="exec-photo">
-                        <div class="photo-overlay">
-                            <div class="flex space-x-2">
-                                <a href=${member.linkedIn} class="social-icon">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                    </svg>
-                                </a>
-                                <a href="mailto:${member.email}" class="social-icon">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                    </svg>
-                                </a>
-                            </div>
+// EXECUTIVE MEMBERS RENDER ============
+function RenderExecutiveMembers(eMembers) {
+    const executiveCore = document.getElementById("executive-board");
+    executiveCore.innerHTML = "";
+
+    eMembers.forEach((member) => {
+        const html = `
+            <div class="exec-card bg-white rounded-xl shadow-lg overflow-hidden animate-slide-up delay-3">
+                <div class="photo-wrapper">
+                    <img 
+                        src="${member.image ? member.image : "https://images.unsplash.com/photo-1740153204804-200310378f2f"}"
+                        alt="${member.name}"
+                        class="exec-photo"
+                    >
+                    <div class="photo-overlay">
+                        <div class="flex space-x-2">
+                            <a href="${member.linkedIn}" class="social-icon">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5..."></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:${member.email}" class="social-icon">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8">
+                                    </path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                    <div class="exec-content p-5">
-                        <span class="position-badge">${member.position}</span>
-                        <h4 class="mt-3 mb-1" style="color: var(--ices-navy);">${member.name}</h4>
-                        <p class="text-sm mb-2" style="color: var(--ices-orange);">${member.yearOfStudy} • ${member.major}</p>
-                        <p class="text-gray-600 text-sm" style="line-height: 1.6;">
-                            ${member.bio}
-                        </p>
-                    </div>
-                </div>`
-        executiveCore.innerHTML += executiveMemberGrid;
-    })
-    
-}
+                </div>
 
-function RenderWholeExecutive(){
-    sessionData.forEach((sData) => {
-        let leaders;
-        let executiveMembers;
-        if (sData.year === session) {
-            leaders = sData.leaders;
-            executiveMembers = sData.executiveMembers;
-            console.log(leaders)
-            RenderLeaders(leaders);
-            RenderExecutiveMembers(executiveMembers);
-            // RenderSessionDropdown();
-        }
-    })
-}
-
-// ==========RENDER THE PAGE =================
-function RenderExecutivePage()
-{
-    /**
-     * RenderSessionDropdown();
-     */
-    document.addEventListener("DOMContentLoaded", ()=>{
-        RenderHeader(pageName);
-        RenderWholeExecutive();
-        RenderFooter();
-    })
+                <div class="exec-content p-5">
+                    <span class="position-badge">${member.position}</span>
+                    <h4 class="mt-3 mb-1" style="color: var(--ices-navy);">${member.name}</h4>
+                    <p class="text-sm mb-2" style="color: var(--ices-orange);">${member.yearOfStudy} • ${member.major}</p>
+                    <p class="text-gray-600 text-sm">${member.bio}</p>
+                </div>
+            </div>
+        `;
+        executiveCore.innerHTML += html;
+    });
 }
 
 
-// let timeout;
-//
-// window.addEventListener("resize", () => {
-//     clearTimeout(timeout);
-//     timeout = setTimeout(() => {
-//         RenderExecutivePage();
-//     }, 200);
+// MAIN RENDER ========================
+function RenderWholeExecutive() {
+    const sData = sessionData.find((s) => s.year === session);
 
-// });
+    if (!sData) return;
 
+    RenderLeaders(sData.leaders);
+    RenderExecutiveMembers(sData.executiveMembers);
+}
 
-
-
-
-
+// FOOTER YEAR ========================
+document.getElementById("currentYear").textContent = new Date().getFullYear();
 
