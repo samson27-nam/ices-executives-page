@@ -232,6 +232,8 @@ if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("active");
     });
+} else {
+    mobileMenu.classList.remove("active");
 }
 
 
@@ -390,4 +392,5 @@ function RenderWholeExecutive() {
 
 // FOOTER YEAR ========================
 document.getElementById("currentYear").textContent = new Date().getFullYear();
+
 
