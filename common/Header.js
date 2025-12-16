@@ -1,6 +1,7 @@
 export default function RenderHeader(pageName)
 {
     const headerElem =  document.getElementById('header');
+    if (!headerElem) return;
     headerElem.innerHTML = `
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between py-4">
@@ -30,8 +31,8 @@ export default function RenderHeader(pageName)
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
-            <nav id="mobileMenu" class="mobile-menu md:hidden" id="mobile-menu">
+                <!-- Mobile Menu -->
+            <nav id="mobileMenu" class="mobile-menu md:hidden">
                 <a href="/index.html" class="mobile-nav-element">Home</a>
                 <a href="#" class="mobile-nav-element">About</a>
                 <a href="https://samson27-nam.github.io/ices-civil-dept/" class="mobile-nav-element">Our Department</a>
@@ -44,31 +45,51 @@ export default function RenderHeader(pageName)
     
     `
     const desktopNavElem = document.getElementById('desktop-nav');
-    desktopNavElem.querySelectorAll('.desktop-nav-element').forEach((element) => {
-        if (element.innerText === pageName) {
-            element.classList.add('text-[#fe7701]');
-            element.classList.remove('transition-colors');
-        } else {
-            element.classList.remove('text-[#fe7701]');
-            element.classList.add('transition-colors');
-        }
-    })
+    if (desktopNavElem) {
+        desktopNavElem.querySelectorAll('.desktop-nav-element').forEach((element) => {
+            if (element.innerText === pageName) {
+                element.classList.add('text-[#fe7701]');
+                element.classList.remove('transition-colors');
+            } else {
+                element.classList.remove('text-[#fe7701]');
+                element.classList.add('transition-colors');
+            }
+        })
+    }
 
     const mobileMenuBtnElem = document.getElementById('mobileMenuBtn');
-    // if(mobileNavElem){
+    const mobileNavElem = document.getElementById('mobileMenu');
 
+    if (mobileNavElem) {
+        // mark the current page inside mobile menu
+        mobileNavElem.querySelectorAll('.mobile-nav-element').forEach((element) => {
+            if (element.innerText === pageName) {
+                element.classList.add('active');
+            } else {
+                element.classList.remove('active');
+            }
+        });
+    }
+
+    if (mobileMenuBtnElem && mobileNavElem) {
         mobileMenuBtnElem.addEventListener('click', ()=>{
-            const mobileNavElem = document.getElementById('mobile-menu');
-            mobileNavElem.querySelectorAll('.mobile-nav-element').forEach((element) => {
-                if (element.innerText === pageName) {
-                    console.log(element.innerText);
-                    element.classList.add('active');
-                } else {
-                    element.classList.remove('active');
-                }
-            })
-        })
-    // }
+            mobileNavElem.classList.toggle('active');
+        });
+    }
+
+    // ensure mobile menu closes when switching to desktop widths
+    try {
+        const mq = window.matchMedia('(min-width: 768px)');
+        const handleMq = (e) => {
+            if (e.matches && mobileNavElem) {
+                mobileNavElem.classList.remove('active');
+            }
+        };
+        if (mq.addEventListener) mq.addEventListener('change', handleMq);
+        else if (mq.addListener) mq.addListener(handleMq);
+    } catch (err) {
+        // ignore if matchMedia not supported
+    }
 
     // console.log(mobileNavElem);
 
